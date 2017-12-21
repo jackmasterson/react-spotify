@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './App.css';
 
-import Launch from './components/Launch';
+import { SidebarItem } from './SidebarItem';
 
-class App extends Component {
+export class SidebarWrapper extends Component {
     render() {
         return (
-            <Launch />
-        );
+            <SidebarItem/>
+        )
     }
 }
 
 export default connect(
     (state) => (state)
-)(App);
+)(SidebarWrapper);
