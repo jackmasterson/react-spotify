@@ -1,4 +1,4 @@
-import React, { Component }from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import {ListWrapper} from './ListWrapper';
@@ -10,7 +10,9 @@ class Launch extends Component {
         return (
             <div>
                 <NavWrapper />
-                <ListWrapper/>
+                <ListWrapper
+                    selected={this.props.queried.state[0].selected}
+                />
                 <SidebarWrapper/>
             </div>
         )

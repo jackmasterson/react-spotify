@@ -6,7 +6,9 @@ export class ListWrapper extends Component {
     render() {
         return (
             <ul>
-                <ListItem />
+                <ListItem 
+                    selected={this.props.selected}
+                />
             </ul>
         );
     }

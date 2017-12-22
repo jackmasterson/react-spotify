@@ -1,10 +1,16 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import common from './reducers/common-reducer';
+import albums from './reducers/album-reducer';
+import artists from './reducers/artist-reducer';
+import tracks from './reducers/track-reducer';
+import queried from './reducers/query-reducer';
 
 const reducer = combineReducers({
-    common
+    albums,
+    artists,
+    tracks,
+    queried,
 });
 
 export default createStore(
