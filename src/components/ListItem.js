@@ -15,12 +15,15 @@ export class ListItem extends Component {
             return (
                 <li>Tracks Info</li>
             );
+        } else if (this.props.selected === 'search') {
+            return (
+                <input placeholder="Search by album, artist, or track"/>
+            )
         } else {
             return (
                 <li>No Info</li>
             );
         }
-
     }
 }
 

@@ -9,10 +9,12 @@ class Launch extends Component {
     render() {
         return (
             <div>
-                <NavWrapper />
-                <ListWrapper
-                    selected={this.props.queried.state[0].selected}
-                />
+                <div className="non-sidebar">
+                    <NavWrapper />
+                    <ListWrapper
+                        selected={this.props.queried.state[0].selected}
+                    />
+                </div>
                 <SidebarWrapper/>
             </div>
         )

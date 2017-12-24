@@ -6,7 +6,7 @@ import {NavItem} from './NavItem';
 export class NavWrapper extends Component {
     render() {
         return (
-            <ul>
+            <ul className="nav-ul">
                 <NavItem />
             </ul>
         )
