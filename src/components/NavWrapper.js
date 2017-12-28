@@ -7,7 +7,10 @@ export class NavWrapper extends Component {
     render() {
         return (
             <ul className="nav-ul">
-                <NavItem />
+                <NavItem
+                    data={this.props.data}
+                    actions={this.props.actions}
+                />
             </ul>
         )
     }

@@ -15,9 +15,14 @@
 .nav-li {
     display: inline-block;
     padding: 20px;
+    cursor: pointer;
 }
 
 .non-sidebar {
     width: 80vw;
     height: 100vh;
+}
+
+.bottom-border {
+    border-top: 1px solid black;
 }

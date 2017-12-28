@@ -1,3 +1,4 @@
+import { TRACK_REQUEST } from '../types/types';
 const initialState = [{
     name: 'Lucy in the sky with diamonds',
     album: 'Sgt Pepper',
@@ -14,7 +15,9 @@ const initialState = [{
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case TRACK_REQUEST:
+            return {...action.payload}
         default:
-            return { state }
+            return {...state}
     }
 }

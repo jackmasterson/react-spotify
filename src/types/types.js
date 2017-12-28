@@ -21,6 +21,11 @@ export const OPTION_SELECTED = 'OPTION_SELECTED';
 export const OPTION_DELETED = 'OPTION_DELETED';
 export const OPTION_RANK_CHANGED = 'OPTION_RANK_CHANGED';
 
+// database types
+export const SAVED_TO_LIB = 'SAVED_TO_LIB';
+export const GET_SAVED_TYPE = 'GET_SAVED_TYPE';
+export const DATA_RETRIEVED = 'DATA_RETRIEVED';
+
 // common changes
 export const INPUT_UPDATE = 'INPUT_UPDATE';
 export const SELECTION_CHANGED = 'SELECTION_CHANGED';

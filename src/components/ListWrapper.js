@@ -8,6 +8,10 @@ export class ListWrapper extends Component {
             <ul>
                 <ListItem 
                     selected={this.props.selected}
+                    getSearch={this.props.getSearch}
+                    response={this.props.response.response}
+                    saveToDatabase={this.props.saveToDatabase}
+                    retrievedFromDatabase={this.props.retrievedFromDatabase}
                 />
             </ul>
         );

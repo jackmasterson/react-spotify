@@ -1,17 +1,11 @@
-const initialState = [{
-    artist: 'The Beatles',
-    albums: [{
-        title: 'Sgt Pepper',
-    }, {
-        title: 'Magical Mystery Tour'
-    }, {
-        title: 'Rubber Soul'
-    }]
-}];
+import { ARTIST_REQUEST } from '../types/types';
+const initialState = [{}];
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case ARTIST_REQUEST:
+            return {...action.payload}
         default:
-            return { state }
+            return {...state}
     }
 }

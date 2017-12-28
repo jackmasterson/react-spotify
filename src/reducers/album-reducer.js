@@ -1,3 +1,5 @@
+import { ALBUM_REQUEST } from '../types/types';
+
 const initialState = [{
     album: 'Sgt Pepper\'s Lonely Hearts Club Band',
     artist: 'The Beatles',
@@ -27,7 +29,9 @@ const initialState = [{
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case ALBUM_REQUEST:
+            return {...action.payload}
         default:
-            return { state }
+            return {...state}
     }
 }
