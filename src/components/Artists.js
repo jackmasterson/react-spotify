@@ -6,7 +6,7 @@ export class Artists extends Component {
         return this.props.retrievedFromDatabase.map(res => {
             return (
                 <div
-                    key={res.artist}>
+                    key={res.id}>
                     <div>{res.artist}</div>
                 </div>
             );

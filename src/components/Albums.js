@@ -6,7 +6,7 @@ export class Albums extends Component {
         return this.props.retrievedFromDatabase.map(res => {
             return (
                 <div
-                    key={res.album}>
+                    key={res.id}>
                     <div>{res.artist}</div>
                     <div>{res.album}</div>
                 </div>

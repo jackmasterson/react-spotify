@@ -14,10 +14,13 @@ import {
 
 class Launch extends Component {
     componentDidMount() {
+        let accessToken;
         let split = window.location.href.split('#access_token=')[1];
-        let accessToken = split.split('&')[0];
+        accessToken = split.split('&')[0];
         sessionStorage.setItem('auth', accessToken);
-        let userId;
+        accessToken = sessionStorage.getItem('auth');
+        // this needs fixing dont use setState vvv
+        this.userId = '';
         fetch('https://api.spotify.com/v1/me', {
             method: 'get',
             headers: {
@@ -28,7 +31,9 @@ class Launch extends Component {
             return res.json();
         })
         .then((res) => {
-            // userId = res.id;
+            console.log('initial res: ', res);
+            this.userId = res.id;
+            this.setState({userId: this.userId});
         })
         .catch((err) => {
             throw new Error(err);
@@ -38,6 +43,7 @@ class Launch extends Component {
         return (
             <div>
                 <div className="non-sidebar">
+                    <h1>hello, {this.userId}</h1>
                     <NavWrapper
                         data={this.props}
                         reveal={this.props.reveal}

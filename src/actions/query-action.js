@@ -5,18 +5,27 @@ import {
     GET_SAVED_TYPE,
     DATA_RETRIEVED
 } from '../types/types';
-import { makeApiCall, initiateSave, initiateDataGrab } from '../lib/apiServices';
+import { makeApiCall,
+         initiateSave,
+         initiateDataGrab,
+         grabFromStore,
+        } from '../lib/apiServices';
 import { artistsSearched } from '../actions/artist-action';
 import { tracksSearched } from '../actions/track-action';
 import { albumsSearched } from '../actions/album-action';
 
 export const reveal = (type) => {
     return (dispatch) => {
-        dispatch(makeSelection(type));
+        // dispatch(makeSelection(type));
         if (type !== 'search') {
-            let t = initiateDataGrab(type);
-            // .then (res) ...
-            dispatch(dataRetrieved(t));
+            initiateDataGrab(type)
+                .then(function (body) {
+                    console.log('body: ', body);
+                    dispatch(dataRetrieved(body));
+                    dispatch(makeSelection(type));
+                });
+        } else {
+            dispatch(makeSelection(type));
         }
     }
 }
@@ -41,6 +50,9 @@ export const getSearch = (name, type) => {
 export const saveToDatabase = (type, item) => {
     return (dispatch) => {
         initiateSave(type, item)
+        .then((res) => {
+            console.log('res: ', res);
+        })
         // .then((res) => {
         //     dispatch(itemSaved(res));
         // })

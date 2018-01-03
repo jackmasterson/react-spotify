@@ -2,72 +2,54 @@
 
 export const getSavedArtists = () => {
     // console.log('getting saved artists');
-    return [{
-        artist: 'The Beatles'
-    }, {
-        artist: 'The Rolling Stones'
-    }, {
-        artist: 'The Who'
-    }, {
-        artist: 'Dawes'
-    }, { 
-        artist: 'Josh Ritter'
-    }];
+    return  fetch('/artists', {
+                method: 'POST',
+                data: {}
+            })
+            .then(function (response) {
+                return response.json()
+            })
 }
 
 export const getSavedAlbums = () => {
-    return [{
-        album: 'Sgt Pepper\'s Lonely Hearts Club Band',
-        artist: 'The Beatles',
-        released: '1969',
-        trackList: [{
-            track: 'Sgt Pepper',
-            lyrics: 'It was twenty years ago today...'
-        }, {
-            track: 'A Little Help from my Friends',
-            lyrics: 'What would you do if I sang you a tune...'
-        }, {
-            track: 'Lucy in the Sky with Diamonds',
-            lyrics: 'Picture yourself on a boat on a river...'
-        }]
-    }, {
-        album: 'Rubber Soul',
-        artist: 'The Beatles',
-        released: '1964',
-        trackList: [{
-            track: 'Something',
-            lyrics: 'Something in the way she moves...'
-        }, {
-            track: 'Drive My Car',
-            lyrics: 'Asked a girl what she wanted to be...'
-        }]
-    }];
+    return fetch('/albums', {
+            method: 'POST',
+            data: {}
+        })
+        .then(function (response) {
+            return response.json()
+        });
 }
 
 export const getSavedTracks = () => {
-    // console.log('getting saved tracks');
-    return [{
-        name: 'Lucy in the sky with diamonds',
-        album: 'Sgt Pepper',
-        artist: 'The Beatles'
-    }, {
-        name: 'Being for the Benefit of Mr. Kite',
-        album: 'Sgt Pepper',
-        artist: 'The Beatles'
-    }, {
-        name: 'In My Life',
-        album: 'Revolver',
-        artist: 'The Beatles'
-    }];
+    console.log('getting saved tracks');
+    return fetch('/tracks', {
+            method: 'POST',
+            data: {}
+        })
+        .then(function (response) {
+            return response.json()
+        });
 }
 
 export const initiateSave = (type, item) => {
-    // console.log('type: ', type);
-    // console.log('item: ', item);
+    console.log('type: ', type);
+    console.log('item: ', item);
+    let data = JSON.stringify(item);
+    console.log('data: ', data);
     // stuff to save to database
     // spoofed for now
-    return true;
-
+    return fetch('/save-' + type, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((res) => {
+            console.log('res: ', res);
+            return res.json();
+        })
 }
 
 export const initiateDataGrab = (type) => {
