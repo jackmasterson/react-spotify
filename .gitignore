@@ -3,5 +3,3 @@
 /node_modules
 /api
 /migrations
-knex.js
-knexfile.js
