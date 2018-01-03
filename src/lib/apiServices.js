@@ -39,7 +39,7 @@ export const initiateSave = (type, item) => {
     console.log('data: ', data);
     // stuff to save to database
     // spoofed for now
-    return fetch('/save-' + type, {
+    return fetch('/tracks', {
             method: 'POST',
             body: data,
             headers: {
