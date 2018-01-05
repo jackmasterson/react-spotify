@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT);
 
 const db = require('./db');
+const tracks = require('./tracks');
 
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -32,7 +33,6 @@ app.get('*', (req, res) => {
         res.sendFile(path.join(DIST_DIR, 'signIn.html'));
     } else {
         res.sendFile(path.join(DIST_DIR, 'authed.html'));
-        getSongs();
     }
     app.post('/login', (req, res) => {
         let user = req.body.username;
@@ -60,56 +60,31 @@ app.get('*', (req, res) => {
     });
 });
 
-app.post('/save-track', (req, res) => {
+// save and get track routes
+app.post('/saved-track', (req, res) => {
     let album = req.body.album.name;
     let artist = req.body.artists[0].name;
     let name = req.body.name;
     try {
         db.spotify.from('songs')
-        .select('*')
-        .where({name, artist, album})
-        .then((res) => {
-            if (res.length === 0) {
-                addToSongs(name, artist, album);
-            } else {
-                console.log('res for from songs: ', res);
-            }
-        })
-    } 
-    catch(err){
+            .select('*')
+            .where({ name, artist, album })
+            .then((res) => {
+                if (res.length === 0) {
+                    tracks.addToSongs(name, artist, album, userId, res);
+                }
+            })
+    }
+    catch (err) {
         throw new Error(err);
     }
 });
 
-function addToSongs(name, album, artist) {
-    db.spotify('songs')
-    .insert({name, album, artist})
-    .then((songId) => {
-        addToUsersToSongs(songId[0]);
-    })
-    .catch((err) => {
-        throw new Error(err);
-    })
-}
-
-function addToUsersToSongs(songId) {
-    db.spotify('userToSongs')
-    .insert({userId, songId})
-    .then((res) => {
-        getSongs();
-    });
-}
-
-function getSongs() {
-    db.spotify.from('songs')
-    .join('userToSongs', 'songs.id', '=', 'userToSongs.songId')
+app.post('/tracks', (req, res) => {
+    tracks.sendSongs(res, userId)
     .then((getSongsRes) => {
-        sendSongs(getSongsRes);
+        console.log('get song res: ', getSongsRes);
+        res.send(getSongsRes);
     })
-}
-function sendSongs(response) {
-    console.log('here: ');
-    app.post('/tracks', (req, res) => {
-        res.send(response);
-    })
-}
+});
+// end save and get track routes
